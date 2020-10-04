@@ -6,7 +6,6 @@ export default function List() {
   const [users, setUsers] = React.useState([]);
   React.useEffect(async () => {
     axios.get('http://localhost:3001/users').then(users => {
-      console.log(users);
       setUsers(users.data);
     })
   }, [])
