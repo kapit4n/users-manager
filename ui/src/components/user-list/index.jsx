@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserList({ users }) {
+export default function UserList({ users }) {
   return <div>
     <h1>User List</h1>
     <table>
