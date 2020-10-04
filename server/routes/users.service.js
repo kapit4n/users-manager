@@ -14,7 +14,19 @@ router.param('user_id', function (req, res, next, user_id) {
 
   // Allow the request to continue
   next();
-})
+});
+
+// Catch all
+router.all('*', function (req, res, next) {
+  console.log('Performing authorization');
+
+  //Authorize and set value
+  var authorized = true;
+
+  if (authorized === false) {
+    res.status(HttpStatus.UNAUTHORIZED).send(HttpStatus.getStatusText(HttpStatus.UNAUTHORIZED));
+  }
+});
 
 // Your enpoints will be configured here
 router.get('/', function (req, res) {
