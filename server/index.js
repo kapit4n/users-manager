@@ -6,7 +6,7 @@ var router = express.Router();
 var users = require('./routes/users.service');
 
 // Set up the users web service endpoint
-app.user('./users', users);
+app.use('./users', users);
 
 // Set the server port value
 app.set('port', 1776);
