@@ -1,8 +1,17 @@
 import React from 'react';
 import UserList from '../components/user-list';
+import axios from 'axios';
 
 export default function List() {
+  const [users, setUsers] = React.useState([]);
+  React.useEffect(async () => {
+    axios.get('http://localhost:3001/users').then(users => {
+      console.log(users);
+      setUsers(users.data);
+    })
+  }, [])
+
   return (
-    <UserList users={[{ name: 'Luis Arce', points: 12 }]}></UserList>
+    <UserList users={users}></UserList>
   )
 }

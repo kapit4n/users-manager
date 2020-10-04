@@ -8,7 +8,7 @@ export default function UserList({ users }) {
         <td>Name</td>
         <td>Points</td>
       </tr>
-      {users.map(u => (<tr>
+      {users.map(u => (<tr> key={u.name}
         <td>{u.name}</td>
         <td>{u.points}</td>
       </tr>))}
