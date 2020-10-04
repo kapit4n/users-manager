@@ -26,11 +26,13 @@ router.all('*', function (req, res, next) {
   if (authorized === false) {
     res.status(HttpStatus.UNAUTHORIZED).send(HttpStatus.getStatusText(HttpStatus.UNAUTHORIZED));
   }
+  next();
 });
+
 
 // Your enpoints will be configured here
 router.get('/', function (req, res) {
-  res.status(HttpStatus.OK).send('Request received');
+  res.status(HttpStatus.OK).json([{ name: 'Luis Arce', points: 3200 }]);
 })
 
 // Your endpoints will be configured here
