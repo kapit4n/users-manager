@@ -1,19 +1,39 @@
 var express = require('express');
 var app = express();
 var cors = require('cors');
+var bodyParser = require('body-parser');
+const sqlite3 = require('sqlite3').verbose();
 
 app.use(cors());
 
-// Require the module for our endpoint
 var users = require('./routes/users.service');
 
-// Set up the users web service endpoint
-app.use('/users', users);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Set the server port value
+
+app.use('/users', users);
 app.set('port', 3001);
 
-// Start listening on the configured port
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 })
+
+const db = new sqlite3.Database('./users.db', (err) => {
+  if (err) {
+    console.log("Error opening db");
+  } else {
+    /* db.run(`create table users(
+      id INTEGER primary key autoincrement not null, 
+      name nvarchar(50) not null)`, (err) => {
+      if (err) {
+        console.log("Table already exists");
+      }
+      let insert = 'insert users (name) values (?)';
+      db.run(insert, ["Luis Arce"]);
+      db.run(insert, ["Juan Arce"]);
+    }); */
+  }
+});
+
+app.db = db;
